@@ -41,9 +41,7 @@ class MY_Controller extends CI_Controller {
     protected function upload_image($image_input_id, $image_name, $upload_path, $upload_thumb_path, $thumbs_with = 500, $thumbs_height = 375) {
         $image = '';
         if (!empty($image_name)) {
-            $config['upload_path'] = $upload_path;
-            $config['allowed_types'] = 'jpg|jpeg|png';
-            $config['file_name'] = $image_name;
+            $config = $this->config_file($upload_path);
 
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
