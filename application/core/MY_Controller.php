@@ -25,34 +25,16 @@ class MY_Controller extends CI_Controller {
         }
     }
 
-    protected function pagination_config($base_url, $total_rows, $per_page, $uri_segment) {
+    protected function pagination_config($base_url, $total_rows, $per_page, $uri_segment,$next = 'Next',$prev = 'Prev',$last = 'Last',$first = 'First') {
         $config['base_url'] = $base_url;
-        $config['total_rows'] = $total_rows;
         $config['per_page'] = $per_page;
         $config['uri_segment'] = $uri_segment;
-
-        $choice = $config['total_rows'] / $config['per_page'];
-        $config['num_links'] = floor($choice);
-
-        $config['full_tag_open'] = '<ul class="pagination">';
-        $config['full_tag_close'] = '</ul>';
-        $config['first_link'] = true;
-        $config['last_link'] = true;
-        $config['first_tag_open'] = '<li>';
-        $config['first_tag_close'] = '</li>';
-        $config['prev_link'] = 'Prev';
-        $config['prev_tag_open'] = '<li class="prev">';
-        $config['prev_tag_close'] = '</li>';
-        $config['next_link'] = 'Next';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['last_tag_open'] = '<li>';
-        $config['last_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-
+        $config['prev_link'] = $prev;
+        $config['next_link'] = $next;
+        $config['last_link'] = $last;
+        $config['first_link'] = $first;
+        $config['total_rows'] = $total_rows;
+        $config['reuse_query_string'] = true;
         return $config;
     }
 
@@ -84,6 +66,62 @@ class MY_Controller extends CI_Controller {
         }
 
         return $image;
+    }
+
+    protected function upload_multiple_image($upload_path = '', $file_name = '', $upload_thumb_path = '', $thumbs_with = 500, $thumbs_height = 500) {
+        $config = $this->config_file($upload_path);
+
+        $image = '';
+        $file = $_FILES[$file_name];
+        $count = count($file['name']);
+        $image_list = array();
+        $config_thumb = array();
+
+        for ($i = 0; $i < $count; $i++) {
+
+            $_FILES['userfile']['name'] = $file['name'][$i];
+            $_FILES['userfile']['type'] = $file['type'][$i];
+            $_FILES['userfile']['tmp_name'] = $file['tmp_name'][$i];
+            $_FILES['userfile']['error'] = $file['error'][$i];
+            $_FILES['userfile']['size'] = $file['size'][$i];
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload()) {
+                $data = $this->upload->data();
+                $image_list[] = $data['file_name'];
+                $image = $data['file_name'];
+
+                $this->load->library('image_lib');
+
+                $config['image_library'] = 'gd2';
+                $config_thumb['source_image'] = $upload_path . '/' . $image;
+                $config_thumb['create_thumb'] = TRUE;
+                $config_thumb['maintain_ratio'] = TRUE;
+                $config_thumb['new_image'] = $upload_thumb_path;
+                $config_thumb['width'] = $thumbs_with;
+                $config_thumb['height'] = $thumbs_height;
+
+                $this->image_lib->initialize($config_thumb);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
+
+                $this->image_lib->resize($image);
+                
+            }
+        }
+        return $image_list;
+    }
+
+    function config_file($upload_path = '') {
+        $config = array();
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['max_size'] = '1200';
+        $config['encrypt_name'] = TRUE;
+//        $config['max_width']     = '1028';
+//        $config['max_height']    = '1028';
+        return $config;
     }
 
     protected function delete_multiple_common($table, $model, $ids){
@@ -145,25 +183,6 @@ class Public_Controller extends MY_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->helper('form');
-        
-        $this->langAbbreviation = $this->uri->segment(1) ? $this->uri->segment(1) : 'en';
-        if($this->langAbbreviation == 'en' || $this->langAbbreviation == 'hu' || $this->langAbbreviation == ''){
-            $this->session->set_userdata('langAbbreviation', $this->langAbbreviation);
-        }
-        
-        if($this->session->userdata('langAbbreviation') == 'en'){
-            $langName = 'english';
-            $this->config->set_item('language', $langName); 
-            $this->session->set_userdata("langAbbreviation",'en');
-            $this->lang->load('english_lang', 'english');
-        }
-        
-        if($this->session->userdata('langAbbreviation') == 'hu' || $this->session->userdata('langAbbreviation') == ''){
-            $langName = 'hungarian';
-            $this->config->set_item('language', $langName); 
-            $this->session->set_userdata("langAbbreviation",'hu');
-            $this->lang->load('hungarian_lang', 'hungarian');
-        }
         
     }
 
