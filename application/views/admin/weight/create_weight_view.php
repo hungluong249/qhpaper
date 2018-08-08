@@ -5,7 +5,6 @@
     }
 </style>
 <link rel="stylesheet" href="<?php echo site_url('assets/') ?>sass/admin/forms.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/lib/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') ?>">
 <!-- <link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css"> -->
 
 <!-- SCRIPT -->
@@ -15,12 +14,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Bảng Màu
-            <small>Thêm mới mã màu</small>
+            Định Lượng
+            <small>Thêm mới định lượng</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="#"><i class="fa fa-dashboard"></i> Bảng Màu</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Định Lượng</a></li>
             <li class="active">Thêm mới</li>
         </ol>
     </section>
@@ -32,7 +31,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Thêm mới mã màu</h3>
+                        <h3 class="box-title">Thêm mới định lượng</h3>
                     </div>
                     <!-- /.box-header -->
                     <?php
@@ -41,16 +40,16 @@
                     <div class="box-body">
                         <div class="form-group col-md-12">
                             <?php
-                            echo form_label('Tên Mã Màu', 'title');
+                            echo form_label('Tên Định Lượng', 'title');
                             echo form_error('title', '<div class="error">', '</div>');
                             echo form_input('title', set_value('title'), 'class="form-control" id="title"');
                             ?>
                         </div>
                         <div class="form-group col-md-12">
                             <?php
-                            echo form_label('Mã Màu', 'hexcolor');
-                            echo form_error('hexcolor', '<div class="error">', '</div>');
-                            echo form_input('hexcolor', set_value('hexcolor'), 'class="form-control my-colorpicker1 colorpicker-element" id="" autocomplete="off"');
+                            echo form_label('Thông Số', 'number');
+                            echo form_error('number', '<div class="error">', '</div>');
+                            echo form_input('number', set_value('number'), 'class="form-control my-colorpicker1 colorpicker-element" id=""');
                             ?>
                         </div>
                     </div>
@@ -71,7 +70,6 @@
 
 <!-- TINYMCE JS-->
 <script type="text/javascript" src="<?php echo site_url('tinymce/tinymce.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/lib/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') ?>"></script>
 <!-- <script src="assets/js/admin/bootstrap-timepicker.min.js"></script> -->
 <script>
     tinymce.init({
@@ -100,11 +98,6 @@
         filemanager_title: "Responsive Filemanager",
         external_plugins: {"filemanager": "<?php echo site_url('filemanager/plugin.min.js'); ?>"}
     });
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
 
 </script>
 
