@@ -38,10 +38,10 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="<?php echo base_url('admin/color/create') ?>" class="btn btn-primary" role="button">Thêm Mới</a>
+                            <a href="<?php echo base_url('admin/weight/create') ?>" class="btn btn-primary" role="button">Thêm Mới</a>
                         </div>
                         <div class="col-md-6">
-                            <form action="<?php echo base_url('admin/color/index') ?>" method="get">
+                            <form action="<?php echo base_url('admin/weight/index') ?>" method="get">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Tìm kiếm ..." name="search" value="<?php echo $keywords ?>">
                                     <span class="input-group-btn">
@@ -59,9 +59,8 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Tên Mã Màu</th>
-                                        <th>Hiển Thị</th>
-                                        <th>Mã Màu</th>
+                                        <th>Tên Định Lượng</th>
+                                        <th>Thông Số</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -71,11 +70,10 @@
                                         <tr class="remove_<?php echo $value['id'] ?>">
                                             <td><?php echo $i++ ?></td>
                                             <td><?php echo $value['title'] ?></td>
-                                            <td><div style="background-color: <?php echo $value['hexcolor'] ?>; width: 30px; height: 30px"></div></td>
-                                            <td><span style="background-color: <?php echo $value['hexcolor'] ?>" class="label"><?php echo $value['hexcolor'] ?></span></td>
+                                            <td><?php echo $value['number'] ?></td>
                                             <td>
-                                                <a href="<?php echo base_url('admin/color/edit/' . $value['id']) ?>" id="dataActionEdit"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                                                <a href="javascript:void(0)" class="btn-remove" data-url="<?php echo base_url('admin/color/remove'); ?>" data-id="<?php echo $value['id'] ?>">
+                                                <a href="<?php echo base_url('admin/weight/edit/' . $value['id']) ?>" id="dataActionEdit"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                                <a href="javascript:void(0)" class="btn-remove" data-url="<?php echo base_url('admin/weight/remove'); ?>" data-id="<?php echo $value['id'] ?>">
                                                     <i class="fa fa-remove" aria-hidden="true"></i>
                                                 </a>
                                             </td>
@@ -85,9 +83,8 @@
                                 <tfoot>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Tên Mã Màu</th>
-                                        <th>Hiển Thị</th>
-                                        <th>Mã Màu</th>
+                                        <th>Tên Định Lượng</th>
+                                        <th>Thông Số</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

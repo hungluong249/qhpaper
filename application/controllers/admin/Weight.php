@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Color extends Admin_Controller {
+class Weight extends Admin_Controller {
 
 	function __construct(){
         parent::__construct();
-        $this->load->model('color_model');
+        $this->load->model('weight_model');
         $this->load->helper('common');
         $this->author_data = handle_author_common_data();
     }
@@ -16,7 +16,7 @@ class Color extends Admin_Controller {
         if($this->input->get('search')){
             $keywords = $this->input->get('search');
         }
-        $total_rows  = $this->color_model->count_search($keywords);
+        $total_rows  = $this->weight_model->count_search($keywords, false);
 
         $this->load->library('pagination');
         $config = array();
@@ -31,11 +31,11 @@ class Color extends Admin_Controller {
         $this->data['page_links'] = $this->pagination->create_links();
         $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
 
-        $result = $this->color_model->fetch_all_pagination($per_page, $this->data['page'], $keywords);
+        $result = $this->weight_model->fetch_all_pagination($per_page, $this->data['page'], $keywords, false);
         $this->data['result'] = $result;
         $this->data['keywords'] = $keywords;
 
-		$this->render('admin/color/list_color_view');
+		$this->render('admin/weight/list_weight_view');
 	}
 
 	public function create()
@@ -43,40 +43,40 @@ class Color extends Admin_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('title', 'Tên Mã Màu', 'trim|required',
+		$this->form_validation->set_rules('title', 'Tên Định Lượng', 'trim|required',
 											array('required' => '%s không được trống')
 										);
-		$this->form_validation->set_rules('hexcolor', 'Mã Màu', 'trim|required',
+		$this->form_validation->set_rules('number', 'Thông Số', 'trim|required',
 											array('required' => '%s không được trống')
 										);
 		if ($this->form_validation->run() == FALSE) {
-			$this->render('admin/color/create_color_view');
+			$this->render('admin/weight/create_weight_view');
 		}else{
 			if ($this->input->post()) {
 				$data = array(
 					'title' => $this->input->post('title'),
-					'hexcolor' => $this->input->post('hexcolor'),
+					'number' => $this->input->post('number'),
 					'created_at' => $this->author_data['created_at'],
                     'created_by' => $this->author_data['created_by']
 				);
 
-				$insert = $this->color_model->insert($data);
+				$insert = $this->weight_model->insert($data);
 				if($insert){
 					$this->session->set_flashdata('message_success', 'Thêm mới thành công!');
 				}else{
 					$this->session->set_flashdata('message_error', 'Thêm mới thất bại!');
-					$this->render('admin/color/create_color_view');
+					$this->render('admin/weight/create_weight_view');
 				}
-				redirect('admin/color');
+				redirect('admin/weight');
 			}
 		}
 	}
 
 	public function edit($id='')
 	{
-		$detail = $this->color_model->get_by_id($id);
+		$detail = $this->weight_model->get_by_id($id);
 		if(!$detail){
-			redirect('admin/color','refresh');
+			redirect('admin/weight','refresh');
 		}
 		$this->data['detail'] = $detail;
 		$this->load->helper('form');
@@ -84,31 +84,31 @@ class Color extends Admin_Controller {
 		// echo '<pre>';
 		// print_r($detail);die;
 
-		$this->form_validation->set_rules('title', 'Tên Mã Màu', 'trim|required',
+		$this->form_validation->set_rules('title', 'Tên Định Lượng', 'trim|required',
 											array('required' => '%s không được trống')
 										);
-		$this->form_validation->set_rules('hexcolor', 'Mã Màu', 'trim|required',
+		$this->form_validation->set_rules('number', 'Thông Số', 'trim|required',
 											array('required' => '%s không được trống')
 										);
 		if ($this->form_validation->run() == FALSE) {
-			$this->render('admin/color/edit_color_view');
+			$this->render('admin/weight/edit_weight_view');
 		}else{
 			if ($this->input->post()) {
 				$data = array(
 					'title' => $this->input->post('title'),
-					'hexcolor' => $this->input->post('hexcolor'),
+					'number' => $this->input->post('number'),
 					'updated_at' => $this->author_data['updated_at'],
                     'updated_by' => $this->author_data['updated_by']
 				);
 
-				$update = $this->color_model->update($id, $data);
+				$update = $this->weight_model->update($id, $data);
 				if($update){
 					$this->session->set_flashdata('message_success', 'Cập nhật thành công!');
 				}else{
 					$this->session->set_flashdata('message_error', 'Cập nhật thất bại!');
-					$this->render('admin/color/edit_color_view');
+					$this->render('admin/weight/edit_weight_view');
 				}
-				redirect('admin/color');
+				redirect('admin/weight');
 			}
 		}
 	}
@@ -117,7 +117,7 @@ class Color extends Admin_Controller {
 	{
 		$id = $this->input->get('id');
 		$data = array('is_deleted' => 1);
-        $update = $this->color_model->update($id, $data);
+        $update = $this->weight_model->update($id, $data);
         if($update == 1){
             return $this->output
                 ->set_content_type('application/json')
@@ -132,5 +132,5 @@ class Color extends Admin_Controller {
 
 }
 
-/* End of file Color.php */
-/* Location: ./application/controllers/admin/Color.php */
+/* End of file weight.php */
+/* Location: ./application/controllers/admin/weight.php */

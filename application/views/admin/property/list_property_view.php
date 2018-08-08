@@ -29,20 +29,7 @@
     <section class="content">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <?php if ($this->session->flashdata('message_error')): ?>
-                <div class="alert alert-warning alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-warning"></i> Alert!</h4>
-                    <?php echo $this->session->flashdata('message_error'); ?>
-                </div>
-            <?php endif ?>
-            <?php if ($this->session->flashdata('message_success')): ?>
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-check"></i> Alert!</h4>
-                    <?php echo $this->session->flashdata('message_success'); ?>
-                </div>
-            <?php endif ?>
+            <?php $this->load->view('admin/error_form_view.php'); ?>
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
@@ -114,31 +101,7 @@
         <!-- END ACCORDION & CAROUSEL-->
     </section>
 </div>
-<script type="text/javascript">
-    $('.btn-remove').click(function(){
-        var url = $(this).data('url');
-        var id = $(this).data('id');
-
-        if(confirm('Chắc chắn xóa?')){
-            $.ajax({
-                method: "get",
-                url: url,
-                data: {
-                    id : id
-                },
-                success: function(response){
-                    if(response.status == 200){
-                        $('.remove_' + id).fadeOut();
-                    }
-
-                },
-                error: function(jqXHR, exception){
-                    console.log(errorHandle(jqXHR, exception));
-                }
-            });
-        }
-    });
-</script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/admin/remove.js'); ?>"></script>
 <!-- DataTables -->
 <!--<script>-->
 <!--    $(function () {-->
