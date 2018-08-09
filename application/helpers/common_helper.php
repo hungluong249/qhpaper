@@ -27,7 +27,6 @@ if (!function_exists('build_array_for_dropdown')) {
      * @return array
      */
     function build_array_for_dropdown($data = array(), $id = null){
-        $new_data = array(0 => 'Danh mục gốc');
         foreach ($data as $key => $value) {
             $new_data[$value['id']] = $value['title'];
 

@@ -1,17 +1,27 @@
 <!-- STYLE -->
-<link rel="stylesheet" href="<?php echo site_url('assets/public/') ?>sass/admin/forms.css">
+<style type="text/css">
+    .error{
+        color: red;
+    }
+</style>
+<link rel="stylesheet" href="<?php echo site_url('assets/') ?>sass/admin/forms.css">
+<link rel="stylesheet" href="<?php echo base_url('assets/css/select2.min.css'); ?>">
+<!-- <link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css"> -->
+
+<!-- SCRIPT -->
+<script src="<?php echo site_url('assets/') ?>js/admin/script.js"></script>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Works
-            <small>List of Works</small>
+            Sản Phẩm
+            <small>Cập Nhật sản phẩm</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="#"><i class="fa fa-dashboard"></i> Works</a></li>
-            <li class="active">Works</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Sản Phẩm</a></li>
+            <li class="active">Cập Nhật</li>
         </ol>
     </section>
 
@@ -22,80 +32,64 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Add item</h3>
+                        <h3 class="box-title">Cập Nhật sản phẩm</h3>
                     </div>
                     <!-- /.box-header -->
                     <?php
                     echo form_open_multipart('', array('class' => 'form-horizontal'));
                     ?>
                     <div class="box-body">
-                        <!-- form start -->
-
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-xs-12">
                             <?php
-                            echo form_label('Name', 'works_name');
-                            echo form_error('works_name');
-                            echo form_input('works_name', set_value('works_name'), 'class="form-control" id="works_name"');
+                            echo form_label('Hình Ảnh Đang Dùng');
                             ?>
+                            <br>
+                            <img src="<?php echo base_url('assets/upload/products/'. $detail['image']) ?>" width=150>
+                            
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-xs-12">
                             <?php
-                            echo form_label('Client', 'works_client');
-                            echo form_error('works_client');
-                            echo form_input('works_client', set_value('works_client'), 'class="form-control" id="works_client"');
+                            echo form_label('Hình Ảnh', 'image');
+                            echo form_error('image', '<div class="error">', '</div>');
+                            echo form_upload('image', set_value('image'), 'class="form-control"');
                             ?>
+                            <br>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <?php
-                            echo form_label('Time', 'works_time');
-                            echo form_error('works_time');
-                            echo form_input('works_time', set_value('works_time'), 'class="form-control" id="works_time"');
-                            ?>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <?php
-                            echo form_label('Field', 'works_field');
-                            echo form_error('works_field');
-                            echo form_dropdown('works_field', $option = array('1' => 'Design', '2' => 'Branding', '3' => 'Photography'), 0, 'class="form-control" id="works_field"');
+                            echo form_label('Tên Sản Phẩm', 'title');
+                            echo form_error('title', '<div class="error">', '</div>');
+                            echo form_input('title', $detail['title'], 'class="form-control" id="title"');
                             ?>
                         </div>
                         <div class="form-group col-md-12">
                             <?php
-                            echo form_label('Image Input', 'works_image');
-                            echo form_error('works_image');
-                            echo form_upload('works_image', set_value('works_image'), 'id="works_image"');
-                            ?>
-                            <p class="help-block">Click to upload.</p>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <?php
-                            echo form_label('Description', 'works_description');
-                            echo form_error('works_description');
-                            echo form_textarea('works_description', set_value('works_description'), 'class="form-control box_content" id="works_description"');
+                            echo form_label('Mã Màu', 'color[]');
+                            echo form_error('color[]', '<div class="error">', '</div>');
+                            echo form_dropdown('color[]', $colors, json_decode($detail['color']), 'class="form-control select2" multiple="multiple" data-placeholder="Chọn màu"
+                            style="width: 100%;"');
                             ?>
                         </div>
                         <div class="form-group col-md-12">
                             <?php
-                            echo form_label('Content', 'works_content');
-                            echo form_error('works_content');
-                            echo form_textarea('works_content', set_value('works_content'), 'class="form-control box_content" id="works_content"');
+                            echo form_label('Tính Chất', 'property[]');
+                            echo form_error('property[]', '<div class="error">', '</div>');
+                            echo form_dropdown('property[]', $properties, json_decode($detail['property']), 'class="form-control select2" multiple="multiple" data-placeholder="Chọn tính chất"
+                            style="width: 100%;"');
                             ?>
                         </div>
-                        <div class="form-group col-md-6">
-                            <div class="check_available">
-                                <?php
-                                echo form_error('works_active');
-                                echo form_checkbox('works_active', 1, false , 'id="works_active"');
-                                ?>
-                                <span>Available?</span>
-                                <p>Check the box if you want to show above information immediately. Uncheck to set it to pending mode.</p>
-                            </div>
+                        <div class="form-group col-md-12">
+                            <?php
+                            echo form_label('Định Lượng', 'weight[]');
+                            echo form_error('weight[]', '<div class="error">', '</div>');
+                            echo form_dropdown('weight[]', $weights, json_decode($detail['weight']), 'class="form-control select2" multiple="multiple" data-placeholder="Chọn định lượng"
+                            style="width: 100%;"');
+                            ?>
                         </div>
-
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Cập Nhật</button>
                     </div>
                     <?php form_close() ?>
                 </div>
@@ -110,6 +104,7 @@
 
 <!-- TINYMCE JS-->
 <script type="text/javascript" src="<?php echo site_url('tinymce/tinymce.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/select2.full.min.js') ?>"></script>
 <script>
     tinymce.init({
         selector: ".box_content",
@@ -137,5 +132,10 @@
         filemanager_title: "Responsive Filemanager",
         external_plugins: {"filemanager": "<?php echo site_url('filemanager/plugin.min.js'); ?>"}
     });
+
+    $(function(){
+        $('.select2').select2()
+    });
+
 </script>
 
