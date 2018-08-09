@@ -1,0 +1,30 @@
+/*
+RESET BOOTSTRAP
+
+AUTHOR: hung.luong@matocreative.vn
+
+
+/*
+========== RESET ==========
+ */
+
+.btn-primary{
+    background-color: $primary;
+    color: #fff;
+
+    border: none;
+
+    text-transform: uppercase;
+
+    padding: 7px 25px;
+
+    &:hover{
+        background-color: $primary-hover;
+    }
+}
+
+a{
+    &:hover{
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,104 @@
+/*
+MAIN FONT SETTINGS OF SITE
+
+AUTHOR: hung.luong@matocreative.vn
+
+ */
+
+/*
+FONT SETTINGS
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&subset=vietnamese');
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4{
+    font-weight: 500;
+}
+
+h1{
+    &.big-heading{
+        font-size: 3.75em;
+        font-weight: 300;
+    }
+}
+
+h4{
+    &.sub-heading{
+        font-size: 1.25em;
+        font-weight: 500;
+    }
+}
+
+p{
+    &.paragraph {
+        font-size: 1.125em;
+        color: $gray-light;
+    }
+
+    &.price{
+        font-size: 2.5em;
+        font-weight: 300;
+    }
+}
+
+a{
+    &.link{
+        font-size: 1.125em;
+        font-weight: 500;
+
+        color: $gray;
+
+        &:hover{
+            color: $gray-dark;
+        }
+    }
+}
+
+/*
+=========================================
+SMALL DESKTOP (Under 1600px)
+=========================================
+ */
+
+@media (max-width: 1600px) and (min-width: 992px){
+    h1{
+        &.big-heading{
+            font-size: 2.25em;
+        }
+    }
+}
+
+/*
+=========================================
+TABLETS (Under 992px)
+=========================================
+ */
+
+@media (max-width: 992px) and (min-width: 768px){
+    p{
+        &.paragraph{
+            font-size: 1.5em;
+        }
+    }
+}
+
+/*
+=========================================
+MOBILE (Under 992px)
+=========================================
+ */
+
+@media (max-width: 768px){
+    h1{
+        &.big-heading{
+            font-size: 2.5em;
+        }
+    }
+}
+
+

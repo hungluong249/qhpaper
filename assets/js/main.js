@@ -1,35 +1,28 @@
 $(document).ready(function(){
-
-
- $("#owl-example").owlCarousel({
-    // Most important owl features
-    items : 4,
-    pagination : true,
-    paginationSpeed : 1000,
-    navigation : true,
-    navigationText : ["","<i class='fa fa-angle-right'></i>"],
-    slideSpeed : 800,
- });
-
-	$("#navigation").sticky({
-		topSpacing : 75,
-	});
-
-	$('#nav').onePageNav({
-		currentClass: 'current',
-		changeHash: false,
-		scrollSpeed: 15000,
-		scrollThreshold: 0.5,
-		filter: '',
-		easing: 'easeInOutExpo'
-	});
-
-     $('#top-nav').onePageNav({
-         currentClass: 'active',
-         changeHash: true,
-         scrollSpeed: 1200
-    });
-//Initiat WOW JS
-    new WOW().init();
-
+    
+    //Get Giant Square has Height as the same as Width
+    
+    var giantWidth = $('#cover #giant-round-square').width();
+    
+    console.log(giantWidth);
+    
+    $('#cover #giant-round-square').css( 'height' , giantWidth );
+    
+    //Make Top Nav smaller when scroll
+    
+    $(window).scroll(function(){
+        var scrollTop = $(window).scrollTop();
+        
+        var base_url = 'http://localhost/qhpaper/';
+        
+        if( scrollTop > 0 ){
+            $('header').addClass('active')
+            $('header #nav-logo img').attr('src' , base_url + 'assets/img/logo.png')
+        }
+    
+        if( scrollTop === 0 ){
+            $('header').removeClass('active')
+            $('header #nav-logo img').attr('src' , base_url + 'assets/img/logo-w.png')
+        }
+    })
 });
