@@ -1,0 +1,336 @@
+/*
+MAIN STYLE OF SITE
+
+AUTHOR: hung.luong@matocreative.vn
+
+ */
+
+.mask{
+    overflow: hidden;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+#fullpage{
+    .section{
+        width: 100%;
+        height: 100vh;
+
+        &#cover{
+            position: relative;
+
+            overflow: hidden;
+
+            #giant-round-square{
+                width: 100%;
+
+                border-radius: 100px;
+
+                @include background-gradient-primary;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                -webkit-transform: rotateZ(30deg) translate(-50%, -5%);
+                -moz-transform: rotateZ(30deg) translate(-50%, -5%);
+                -ms-transform: rotateZ(30deg) translate(-50%, -5%);
+                -o-transform: rotateZ(30deg) translate(-50%, -5%);
+                transform: rotateZ(30deg) translate(-50%, -5%);
+            }
+
+            .container{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+
+                @include makeItCenter;
+
+                .row{
+                    .left{
+                        h1{
+                            &.big-heading{
+                                color: #fff;
+                            }
+                        }
+
+                        h4{
+                            &.sub-heading{
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &#about{
+            .container-fluid{
+                padding-left: 0;
+                padding-right: 0;
+
+                > .row{
+                    margin-left: 0;
+                    margin-right: 0;
+
+                    .left{
+                        .row{
+                            margin-top: 300px;
+
+                            img{
+                                margin-bottom: 30px;
+                            }
+                        }
+                    }
+
+                    .right{
+                        height: 100vh;
+
+                        position: relative;
+
+                        background-size: cover;
+                        background-position: center right;
+                        background-repeat: no-repeat;
+                        background-attachment: fixed;
+
+                        .overlay{
+                            width: 100%;
+                            height: 100%;
+
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            z-index: 1;
+
+                            @include background-gradient-primary;
+                            opacity: 0.9;
+                        }
+
+                        .information{
+                            width: 100%;
+
+                            padding-top: 50px;
+                            padding-bottom: 50px;
+
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            z-index: 2;
+
+                            @include makeItCenter;
+
+                            .row{
+                                margin-left: 0;
+                                margin-right: 0;
+
+                                .item{
+                                    text-align: center;
+
+                                    h1{
+                                        &.big-heading{
+                                            color: #fff;
+                                        }
+                                    }
+
+                                    h4{
+                                        &.sub-heading{
+                                            color: #fff;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &#product{
+            .slide{
+
+                &:first-of-type{
+                    background: #D74177;
+                    background: -moz-linear-gradient(-45deg, #FFE98A 0%, #D74177 100%);
+                    background: -webkit-gradient(left top, right bottom, color-stop(0%, #FFE98A), color-stop(100%, #D74177));
+                    background: -webkit-linear-gradient(-45deg, #FFE98A 0%, #D74177 100%);
+                    background: -o-linear-gradient(-45deg, #FFE98A 0%, #D74177 100%);
+                    background: -ms-linear-gradient(-45deg, #FFE98A 0%, #D74177 100%);
+                    background: linear-gradient(135deg, #FFE98A 0%, #D74177 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFE98A', endColorstr='#D74177', GradientType=1 );
+                }
+
+                &:nth-of-type(2){
+                    background: #D74177;
+                    background: -moz-linear-gradient(-45deg, #FFE98A 0%, #D74177 100%);
+                    background: -webkit-gradient(left top, right bottom, color-stop(0%, #FFE98A), color-stop(100%, #D74177));
+                    background: -webkit-linear-gradient(-45deg, #FFE98A 0%, #D74177 100%);
+                    background: -o-linear-gradient(-45deg, #FFE98A 0%, #D74177 100%);
+                    background: -ms-linear-gradient(-45deg, #FFE98A 0%, #D74177 100%);
+                    background: linear-gradient(135deg, #FFE98A 0%, #D74177 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFE98A', endColorstr='#D74177', GradientType=1 );
+                }
+
+                .container{
+                    .row{
+                        .left{
+                            color: #fff;
+
+                            .head{
+                                margin-bottom: 30px;
+                            }
+
+                            .body{
+                                .item{
+                                    margin-bottom: 15px;
+
+                                    h4{
+                                        &.sub-heading{
+                                            margin-bottom: 15px;
+                                        }
+                                    }
+
+                                    ul{
+                                        list-style: none;
+
+                                        padding-left: 0;
+
+                                        li{
+                                            display: inline-block;
+
+                                            margin-right: 20px;
+
+                                            .square{
+                                                width: 45px;
+                                                height: 45px;
+
+                                                border: 3px solid #fff;
+
+                                                margin-bottom: 5px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &#application{
+            .container{
+                .row{
+                    &.head{
+                        .left{
+                            h1{
+                                &.big-heading{
+                                    margin-top: 0;
+                                }
+                            }
+                        }
+                    }
+
+                    &.body{
+                        margin-top: 50px;
+                        padding-left: 15px;
+                        padding-right: 15px;
+
+                        .owl-carousel{
+                            .item{
+                                .inner{
+                                    .mask{
+                                        width: 100%;
+                                        height: 400px;
+
+                                        -webkit-border-radius: 7px;
+                                        -moz-border-radius: 7px;
+                                        border-radius: 7px;
+
+                                        position: relative;
+
+                                        .content{
+                                            width: 100%;
+                                            padding: 10px 25px;
+
+                                            position: absolute;
+                                            top: 15px;
+                                            left: 0px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .owl-nav{
+                                padding-top: 15px;
+
+                                button{
+                                    padding: 5px 15px !important;
+                                    background-color: #e7e7e7;
+
+                                    margin-right: 15px;
+
+                                    font-size: 1.5em;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &#contact{
+            .container{
+                .row{
+                    &.body{
+                        .left{
+                            address{
+                                a{
+                                    color: $gray-light;
+
+                                    &:hover{
+                                        color: $gray-dark;
+                                    }
+                                }
+                            }
+                        }
+
+                        .right{
+                            .form-horizontal{
+                                .form-group{
+                                    margin-left: 0;
+                                    margin-right: 0;
+
+                                    .form-control{
+                                        border: none;
+                                        -webkit-box-shadow: none;
+                                        -moz-box-shadow: none;
+                                        box-shadow: none;
+
+                                        background-color: transparent;
+                                        -webkit-border-radius: 0px;
+                                        -moz-border-radius: 0px;
+                                        border-radius: 0px;
+
+                                        border-bottom: 1px solid #999;
+                                    }
+
+                                    textarea{
+                                        resize: none;
+                                    }
+
+                                    label{
+                                        color: $gray-light;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

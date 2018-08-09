@@ -1,0 +1,189 @@
+/*
+MAIN STYLE FOR HEADER
+
+AUTHOR: hung.luong@matocreative.vn
+
+
+/*
+========== HEADER ==========
+ */
+
+header{
+    width: 100%;
+
+    position: fixed;
+    z-index: 1011;
+
+    @include transition(300ms);
+
+    .container{
+        padding-top: 70px;
+
+        @include transition(300ms);
+
+        .nav-left{
+            float: left;
+
+            .nav-item{
+                display: inline-block;
+
+                &#nav-logo{
+                    img{
+                        width: 100px;
+
+                        @include transition(300ms);
+                    }
+                }
+
+                &#nav-expand-button{
+                    #btn-nav-expand{
+                        float: right;
+                        margin-top: 60px;
+                        margin-right: 30px;
+
+                        @include transition(300ms);
+
+                        span{
+                            &.nav-icon{
+                                width: 30px;
+                                height: 5px;
+
+                                background-color: $gray-dark;
+
+                                display: block;
+
+                                position: relative;
+
+                                @include transition(300ms);
+
+                                &:before, &:after{
+                                    content: '';
+                                    display:block;
+                                    width:30px;
+                                    height:5px;
+                                    background-color: $gray-dark;
+                                    position: absolute;
+
+                                    @include transition(300ms);
+                                }
+
+                                &:before {
+                                    margin-top:-10px;
+                                }
+
+                                &:after {
+                                    margin-top:10px;
+                                }
+                            }
+                        }
+
+                        &.active{
+                            margin-right: 15px;
+
+                            @include transition(300ms);
+
+                            span{
+                                &.nav-icon{
+                                    background-color: transparent;
+
+                                    &:before {
+                                        margin-top:0;
+                                        transform:rotate(45deg);
+                                    }
+
+                                    &:after {
+                                        margin-top:0;
+                                        transform:rotate(-45deg);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &#nav-main{
+                    ul{
+                        list-style: none;
+
+                        li{
+                            display: inline-block;
+                            padding: 15px;
+
+                            a{
+                                color: #fff;
+
+                                font-weight: 500;
+                                font-size: 1.125em;
+
+                                @include transition(300ms);
+
+                                &:hover{
+                                    color: #fff;
+                                }
+
+                                &.btn-primary{
+                                    background-color: #fff;
+                                    color: $primary;
+
+                                    @include transition(300ms);
+
+                                    &:hover{
+                                        color: $primary-hover;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.active{
+        background-color: rgba(255,255,255,0.85);
+
+        @include transition(300ms);
+
+        .container{
+            padding-top: 35px;
+
+            @include transition(300ms);
+
+            .nav-left{
+                .nav-item{
+                    &#nav-logo{
+                        img{
+                            width: 70px;
+
+                            @include transition(300ms);
+                        }
+                    }
+
+                    &#nav-main{
+                        ul{
+                            li{
+                                a{
+                                    color: $gray;
+
+                                    @include transition(300ms);
+
+                                    &:hover{
+                                        color: $gray;
+                                    }
+
+                                    &.btn-primary{
+                                        @include background-gradient-primary;
+
+                                        color: #fff;
+
+                                        @include transition(300ms);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
