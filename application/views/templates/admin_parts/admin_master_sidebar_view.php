@@ -28,119 +28,30 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
-                <li class="active">
+                <li class="<?php echo ($this->uri->segment(2) == '') ? 'active' : '' ?>">
                     <a href="<?php echo base_url('admin') ?>">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a href="">
-                        <i class="fa fa-home"></i>
-                        <span>Homepage</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url('admin/homepage') ?>"><i class="fa fa-desktop"></i> Overview</a></li>
-                        <li><a href="<?php echo base_url('admin/homepage/slider') ?>"><i class="fa fa-picture-o"></i> Slider</a></li>
-                        <li><a href="<?php echo base_url('admin/homepage/featured') ?>"><i class="fa fa-star-o"></i> Featured</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="">
-                        <i class="fa fa-user-circle-o"></i>
-                        <span>About us</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url('admin/about') ?>"><i class="fa fa-desktop"></i> Overview</a></li>
-                        <li><a href="<?php echo base_url('admin/about/description') ?>"><i class="fa fa-comment-o"></i> Description</a></li>
-                        <li><a href="<?php echo base_url('admin/about/services') ?>"><i class="fa fa-gears"></i> Services</a></li>
-                        <li><a href="<?php echo base_url('admin/about/team') ?>"><i class="fa fa-group"></i> Team</a></li>
-                        <li><a href="<?php echo base_url('admin/about/testinomials') ?>"><i class="fa fa-comments-o"></i> Testinomials</a></li>
-                    </ul>
-                </li>
-
-                <li class="treeview">
-                    <a href="">
-                        <i class="fa fa-drivers-license-o"></i>
-                        <span>Works/ Portfolio</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url('admin/works') ?>"><i class="fa fa-desktop"></i> Overview</a></li>
-                        <li><a href="<?php echo base_url('admin/works/field') ?>"><i class="fa fa-filter"></i> Field of Works</a></li>
-                        <li><a href="<?php echo base_url('admin/works/works') ?>"><i class="fa fa-list"></i> List of Works</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="">
-                        <i class="fa fa-cubes"></i>
-                        <span>Products</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url('admin/products') ?>"><i class="fa fa-desktop"></i> Overview</a></li>
-                        <li class="treeview">
-                            <a href=""><i class="fa fa-filter"></i> Category</a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?php echo base_url('admin/products/category_1') ?>"><i class="fa fa-circle-o"></i> Category I</a></li>
-                                <li><a href="<?php echo base_url('admin/products/category_2') ?>"><i class="fa fa-circle-o"></i> Category II</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="<?php echo base_url('admin/products/products') ?>"><i class="fa fa-list"></i> List of Products</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="">
-                        <i class="fa fa-file-text-o"></i>
-                        <span>Order</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url('admin/orders/') ?>"><i class="fa fa-desktop"></i> Overview</a></li>
-                        <li><a href="<?php echo base_url('admin/orders/pending') ?>"><i class="fa fa-refresh"></i> Pending Orders</a></li>
-                        <li><a href="<?php echo base_url('admin/orders/completed') ?>"><i class="fa fa-check-square-o"></i> Completed Orders</a></li>
-                        <li><a href="<?php echo base_url('admin/orders/cancelled') ?>"><i class="fa fa-window-close-o"></i>Cancelled Orders </a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="">
-                        <i class="fa fa-newspaper-o"></i>
-                        <span>Blogs</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url('admin/blogs') ?>"><i class="fa fa-desktop"></i> Overview</a></li>
-                        <li class="treeview">
-                            <a href=""><i class="fa fa-filter"></i> Category</a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?php echo base_url('admin/blogs/category_1') ?>"><i class="fa fa-circle-o"></i> Category I</a></li>
-                                <li><a href="<?php echo base_url('admin/blogs/category_2') ?>"><i class="fa fa-circle-o"></i> Category II</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="<?php echo base_url('admin/blogs/blogs') ?>"><i class="fa fa-list"></i> List of blogs</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="<?php echo base_url('admin/messages') ?>">
-                        <i class="fa fa-inbox"></i> <span>Messages</span>
+                
+                <li class="<?php echo ($this->uri->segment(2) == 'color') ? 'active' : '' ?>">
+                    <a href="<?php echo base_url('admin/color') ?>">
+                        <i class="fa fa-paint-brush" aria-hidden="true"></i> <span>Bảng Màu</span>
                     </a>
                 </li>
-                <li>
-                    <a href="<?php echo base_url('admin/subscribe') ?>">
-                        <i class="fa fa-envelope-o"></i> <span>Subscribe</span>
+                <li class="<?php echo ($this->uri->segment(2) == 'property') ? 'active' : '' ?>">
+                    <a href="<?php echo base_url('admin/property') ?>">
+                        <i class="fa fa-flask" aria-hidden="true"></i> <span>Tính Chất</span>
+                    </a>
+                </li>
+                <li class="<?php echo ($this->uri->segment(2) == 'weight') ? 'active' : '' ?>">
+                    <a href="<?php echo base_url('admin/weight') ?>">
+                        <i class="fa fa-balance-scale" aria-hidden="true"></i> <span>Định Lượng</span>
+                    </a>
+                </li>
+                <li class="<?php echo ($this->uri->segment(2) == 'product') ? 'active' : '' ?>">
+                    <a href="<?php echo base_url('admin/product') ?>">
+                        <i class="fa fa-book" aria-hidden="true"></i> <span>Sản Phẩm</span>
                     </a>
                 </li>
                 <li class="header">DOCUMENTATION</li>

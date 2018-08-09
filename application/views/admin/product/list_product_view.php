@@ -15,12 +15,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Tình Chất
-            <small>Danh sách tình chất</small>
+            Sản Phẩm
+            <small>Danh sách sản phẩm</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="#"><i class="fa fa-dashboard"></i> Tình Chất</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Sản Phẩm</a></li>
             <li class="active">Danh sách</li>
         </ol>
     </section>
@@ -33,15 +33,15 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Tình Chất</h3>
+                        <h3 class="box-title">Sản Phẩm</h3>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="<?php echo base_url('admin/property/create') ?>" class="btn btn-primary" role="button">Thêm Mới</a>
+                            <a href="<?php echo base_url('admin/product/create') ?>" class="btn btn-primary" role="button">Thêm Mới</a>
                         </div>
                         <div class="col-md-6">
-                            <form action="<?php echo base_url('admin/property/index') ?>" method="get">
+                            <form action="<?php echo base_url('admin/product/index') ?>" method="get">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Tìm kiếm ..." name="search" value="<?php echo $keywords ?>">
                                     <span class="input-group-btn">
@@ -60,7 +60,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Hình Ảnh</th>
-                                        <th>Tên Tính Chất</th>
+                                        <th>Tên Sản Phẩm</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -69,11 +69,14 @@
                                     <?php foreach ($result as $key => $value): ?>
                                         <tr class="remove_<?php echo $value['id'] ?>">
                                             <td><?php echo $i++ ?></td>
-                                            <td><img src="<?php echo base_url('assets/upload/property/'. $value['image']) ?>" width="150"></td>
+                                            <td><img src="<?php echo base_url('assets/upload/products/'. $value['image']) ?>" width="150"></td>
                                             <td><?php echo $value['title'] ?></td>
                                             <td>
-                                                <a href="<?php echo base_url('admin/property/edit/' . $value['id']) ?>" id="dataActionEdit"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                                                <a href="javascript:void(0)" class="btn-remove" data-url="<?php echo base_url('admin/property/remove'); ?>" data-id="<?php echo $value['id'] ?>">
+                                                <a href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" id="dataActionEdit"><i class="fa fa-eye"></i> </a>
+                                                &nbsp&nbsp&nbsp
+                                                <a href="<?php echo base_url('admin/product/edit/' . $value['id']) ?>" id="dataActionEdit"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                                &nbsp&nbsp&nbsp
+                                                <a href="javascript:void(0)" class="btn-remove" data-url="<?php echo base_url('admin/product/remove'); ?>" data-id="<?php echo $value['id'] ?>">
                                                     <i class="fa fa-remove" aria-hidden="true"></i>
                                                 </a>
                                             </td>
@@ -84,7 +87,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Hình Ảnh</th>
-                                        <th>Tên Tính Chất</th>
+                                        <th>Tên Sản Phẩm</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

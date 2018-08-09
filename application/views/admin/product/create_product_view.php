@@ -1,18 +1,27 @@
 <!-- STYLE -->
-<link rel="stylesheet" href="<?php echo site_url('assets/public/lib/') ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="<?php echo site_url('assets/public/') ?>sass/admin/forms.css">
+<style type="text/css">
+    .error{
+        color: red;
+    }
+</style>
+<link rel="stylesheet" href="<?php echo site_url('assets/') ?>sass/admin/forms.css">
+<link rel="stylesheet" href="<?php echo base_url('assets/css/select2.min.css'); ?>">
+<!-- <link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css"> -->
+
+<!-- SCRIPT -->
+<script src="<?php echo site_url('assets/') ?>js/admin/script.js"></script>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            About
-            <small>Testinomials</small>
+            Sản Phẩm
+            <small>Thêm mới sản phẩm</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="#"><i class="fa fa-dashboard"></i> About</a></li>
-            <li class="active">Testinomials</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Sản Phẩm</a></li>
+            <li class="active">Thêm mới</li>
         </ol>
     </section>
 
@@ -23,49 +32,56 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Add item</h3>
+                        <h3 class="box-title">Thêm mới sản phẩm</h3>
                     </div>
                     <!-- /.box-header -->
                     <?php
                     echo form_open_multipart('', array('class' => 'form-horizontal'));
                     ?>
                     <div class="box-body">
-                        <!-- form start -->
-
-                        <div class="form-group">
+                        <div class="form-group col-xs-12">
                             <?php
-                            echo form_label('Full Name', 'testinomial_name');
-                            echo form_error('testinomial_name');
-                            echo form_input('testinomial_name', set_value('testinomial_name'), 'class="form-control" id="testinomial_name"');
+                            echo form_label('Hình Ảnh', 'image');
+                            echo form_error('image', '<div class="error">', '</div>');
+                            echo form_upload('image', set_value('image'), 'class="form-control"');
+                            ?>
+                            <br>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <?php
+                            echo form_label('Tên Sản Phẩm', 'title');
+                            echo form_error('title', '<div class="error">', '</div>');
+                            echo form_input('title', set_value('title'), 'class="form-control" id="title"');
                             ?>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             <?php
-                            echo form_label('Position', 'testinomial_position');
-                            echo form_error('testinomial_position');
-                            echo form_input('testinomial_position', set_value('testinomial_position'), 'class="form-control" id="testinomial_position"');
+                            echo form_label('Mã Màu', 'color[]');
+                            echo form_error('color[]', '<div class="error">', '</div>');
+                            echo form_dropdown('color[]', $colors, '', 'class="form-control select2" multiple="multiple" data-placeholder="Chọn màu"
+                            style="width: 100%;"');
                             ?>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             <?php
-                            echo form_label('Content', 'testinomial_content');
-                            echo form_error('testinomial_content');
-                            echo form_textarea('testinomial_content', set_value('testinomial_content'), 'class="form-control box_content" id="testinomial_content"');
+                            echo form_label('Tính Chất', 'property[]');
+                            echo form_error('property[]', '<div class="error">', '</div>');
+                            echo form_dropdown('property[]', $properties, '', 'class="form-control select2" multiple="multiple" data-placeholder="Chọn tính chất"
+                            style="width: 100%;"');
                             ?>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             <?php
-                            echo form_label('Image Input', 'testinomial_image');
-                            echo form_error('testinomial_image');
-                            echo form_upload('testinomial_image', set_value('testinomial_image'), 'id="testinomial_image"');
+                            echo form_label('Định Lượng', 'weight[]');
+                            echo form_error('weight[]', '<div class="error">', '</div>');
+                            echo form_dropdown('weight[]', $weights, '', 'class="form-control select2" multiple="multiple" data-placeholder="Chọn định lượng"
+                            style="width: 100%;"');
                             ?>
-                            <p class="help-block">Click to upload.</p>
                         </div>
-
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Thêm Mới</button>
                     </div>
                     <?php form_close() ?>
                 </div>
@@ -80,6 +96,7 @@
 
 <!-- TINYMCE JS-->
 <script type="text/javascript" src="<?php echo site_url('tinymce/tinymce.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/select2.full.min.js') ?>"></script>
 <script>
     tinymce.init({
         selector: ".box_content",
@@ -107,5 +124,10 @@
         filemanager_title: "Responsive Filemanager",
         external_plugins: {"filemanager": "<?php echo site_url('filemanager/plugin.min.js'); ?>"}
     });
+
+    $(function(){
+        $('.select2').select2()
+    });
+
 </script>
 

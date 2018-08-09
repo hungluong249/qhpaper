@@ -24,6 +24,16 @@ class MY_Model extends CI_Model {
         return $this->db->update($this->table, $data);
     }
 
+    public function fetch_all()
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('is_deleted', 0);
+        $this->db->order_by('id', 'desc');
+
+        return $result = $this->db->get()->result_array();
+    }
+
     public function fetch_all_pagination($limit = NULL, $start = NULL, $keywords = '', $or_like = true) {
         $this->db->select($this->table .'.*');
         $this->db->from($this->table);
