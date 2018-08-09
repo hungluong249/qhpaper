@@ -221,9 +221,13 @@ class Product extends Admin_Controller {
 	public function remove()
 	{
 		$id = $this->input->get('id');
+		$detail = $this->product_model->get_by_id($id);
 		$data = array('is_deleted' => 1);
         $update = $this->product_model->update($id, $data);
         if($update == 1){
+        	if(file_exists('assets/upload/products/'.$detail['image'])){
+        		unlink('assets/upload/products/'.$detail['image']);
+        	}
             return $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(200)

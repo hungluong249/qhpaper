@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Property extends Admin_Controller {
+class Application extends Admin_Controller {
 
 	function __construct(){
         parent::__construct();
-        $this->load->model('property_model');
+        $this->load->model('application_model');
         $this->load->helper('common');
         $this->author_data = handle_author_common_data();
     }
@@ -16,11 +16,11 @@ class Property extends Admin_Controller {
         if($this->input->get('search')){
             $keywords = $this->input->get('search');
         }
-        $total_rows  = $this->property_model->count_search($keywords, false);
+        $total_rows  = $this->application_model->count_search($keywords, false);
 
         $this->load->library('pagination');
         $config = array();
-        $base_url = base_url('admin/property/index');
+        $base_url = base_url('admin/application/index');
         $per_page = 10;
         $uri_segment = 4;
         foreach ($this->pagination_config($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
@@ -31,11 +31,11 @@ class Property extends Admin_Controller {
         $this->data['page_links'] = $this->pagination->create_links();
         $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
 
-        $result = $this->property_model->fetch_all_pagination($per_page, $this->data['page'], $keywords, false);
+        $result = $this->application_model->fetch_all_pagination($per_page, $this->data['page'], $keywords, false);
         $this->data['result'] = $result;
         $this->data['keywords'] = $keywords;
 
-		$this->render('admin/property/list_property_view');
+		$this->render('admin/application/list_application_view');
 	}
 
 	public function create()
@@ -51,12 +51,12 @@ class Property extends Admin_Controller {
 											array('required' => '%s không được trống')
 										);
 		if ($this->form_validation->run() == FALSE) {
-			$this->render('admin/property/create_property_view');
+			$this->render('admin/application/create_application_view');
 		}else{
 			if ($this->input->post()) {
 				if(!empty($_FILES['image']['name'])){
                     $this->check_img($_FILES['image']['name'], $_FILES['image']['size']);
-                    $image = $this->upload_image('image', $_FILES['image']['name'], 'assets/upload/property', 'assets/upload/property/thumb');
+                    $image = $this->upload_image('image', $_FILES['image']['name'], 'assets/upload/application', 'assets/upload/application/thumb');
                 }
 				$data = array(
 					'title' => $this->input->post('title'),
@@ -65,23 +65,23 @@ class Property extends Admin_Controller {
                     'created_by' => $this->author_data['created_by']
 				);
 
-				$insert = $this->property_model->insert($data);
+				$insert = $this->application_model->insert($data);
 				if($insert){
 					$this->session->set_flashdata('message_success', 'Thêm mới thành công!');
 				}else{
 					$this->session->set_flashdata('message_error', 'Thêm mới thất bại!');
-					$this->render('admin/property/create_property_view');
+					$this->render('admin/application/create_application_view');
 				}
-				redirect('admin/property');
+				redirect('admin/application');
 			}
 		}
 	}
 
 	public function edit($id='')
 	{
-		$detail = $this->property_model->get_by_id($id);
+		$detail = $this->application_model->get_by_id($id);
 		if(!$detail){
-			redirect('admin/property','refresh');
+			redirect('admin/application','refresh');
 		}
 		$this->data['detail'] = $detail;
 		$this->load->helper('form');
@@ -91,12 +91,12 @@ class Property extends Admin_Controller {
 											array('required' => '%s không được trống')
 										);
 		if ($this->form_validation->run() == FALSE) {
-			$this->render('admin/property/edit_property_view');
+			$this->render('admin/application/edit_application_view');
 		}else{
 			if ($this->input->post()) {
 				if(!empty($_FILES['image']['name'])){
                     $this->check_img($_FILES['image']['name'], $_FILES['image']['size']);
-                    $image = $this->upload_image('image', $_FILES['image']['name'], 'assets/upload/property', 'assets/upload/property/thumb');
+                    $image = $this->upload_image('image', $_FILES['image']['name'], 'assets/upload/application', 'assets/upload/application/thumb');
                 }
 				$data = array(
 					'title' => $this->input->post('title'),
@@ -107,18 +107,18 @@ class Property extends Admin_Controller {
 					$data['image'] = $image;
 				}
 
-				$update = $this->property_model->update($id, $data);
+				$update = $this->application_model->update($id, $data);
 				if($update){
 					if(!empty($_FILES['image']['name'])){
-						unlink('assets/upload/property/'.$detail['image']);
+						unlink('assets/upload/application/'.$detail['image']);
 					}
 					$this->session->set_flashdata('message_success', 'Cập nhật thành công!');
 				}else{
-					unlink('assets/upload/property/'.$image);
+					unlink('assets/upload/application/'.$image);
 					$this->session->set_flashdata('message_error', 'Cập nhật thất bại!');
-					$this->render('admin/property/edit_property_view');
+					$this->render('admin/application/edit_application_view');
 				}
-				redirect('admin/property');
+				redirect('admin/application');
 			}
 		}
 	}
@@ -126,12 +126,12 @@ class Property extends Admin_Controller {
 	public function remove()
 	{
 		$id = $this->input->get('id');
-		$detail = $this->property_model->get_by_id($id);
+		$detail = $this->application_model->get_by_id($id);
 		$data = array('is_deleted' => 1);
-        $update = $this->property_model->update($id, $data);
+        $update = $this->application_model->update($id, $data);
         if($update == 1){
-        	if(file_exists('assets/upload/property/'.$detail['image'])){
-        		unlink('assets/upload/property/'.$detail['image']);
+        	if(file_exists('assets/upload/application/'.$detail['image'])){
+        		unlink('assets/upload/application/'.$detail['image']);
         	}
             return $this->output
                 ->set_content_type('application/json')
@@ -149,11 +149,11 @@ class Property extends Admin_Controller {
         $fileextension = substr($filename, $map,(strlen($filename)-$map));
         if(!($fileextension == 'jpg' || $fileextension == 'jpeg' || $fileextension == 'png' || $fileextension == 'gif')){
             $this->session->set_flashdata('message_error', 'Đuôi file image phải là jpg | jpeg | png | gif!');
-            redirect('admin/property');
+            redirect('admin/application');
         }
         if ($filesize > 1228800) {
             $this->session->set_flashdata('message_error', sprintf('Hình ảnh vượt quá %u Kb. Vui lòng kiểm tra lại và thực hiện lại thao tác!', 1200));
-            redirect('admin/property');
+            redirect('admin/application');
         }
     }
 
